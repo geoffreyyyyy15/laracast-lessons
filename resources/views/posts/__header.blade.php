@@ -7,23 +7,7 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <x-dropdown>
-                <x-slot name="trigger">
-                    <button  class="py-2 pr-9 pl-3 w-full lg:w-32 text-left lg:inline-flex
-                    text-sm font-semibold">  {{ isset($currentCategory) ?
-                    ucwords($currentCategory->name) : 'Categories' }}
-                </button>
-
-
-                </x-slot>
-                <x-dropdown-item href="/">
-                    All
-            </x-dropdown-item>
-                        @foreach ($categories as $category)
-        <x-dropdown-item href="/categories/{{ $category->slug }}">{{ ucwords($category->name)  }}</x-dropdown-item >
-
-        @endforeach
-            </x-dropdown>
+           <x-category-dropdown />
         </div>
 
         <!-- Other Filters -->

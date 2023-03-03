@@ -10,13 +10,13 @@ class PostController extends Controller
 {
     public function index() {
 
-        return view('posts')
-            ->with('posts', Post::latest()->filter(request(['search']))->get())
-            ->with('categories', Category::all());
+        return view('posts.index')
+            ->with('posts', Post::latest()->filter(request(['search', 'category']))->get());
+
     }
     public function show(Post $post)
     {
-        return view('post')
+        return view('posts.show')
             ->with('post', $post);
     }
 }

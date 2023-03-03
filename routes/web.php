@@ -23,17 +23,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-Route::get('categories/{category:slug}', function (Category $category){
-    return view('posts')
-            ->with('posts', $category->posts)
-            ->with('currentCategory', $category)
-            ->with('categories', Category::all());
-}
-);
+// Route::get('categories/{category:slug}', function (Category $category){
+//     return view('posts')
+//             ->with('posts', $category->posts)
+//             ->with('currentCategory', $category)
+//             ->with('categories', Category::all());
+// }
+// );
 Route::get('author/{author:username}', function (User $author){
-    return view('posts')
-            ->with('posts', $author->posts)
-            ->with('categories', Category::all());
+    return view('posts.index')
+            ->with('posts', $author->posts);
 }
 );
 Route::get('/index', [UserController::class, 'index']);
