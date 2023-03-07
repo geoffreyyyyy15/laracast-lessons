@@ -28,10 +28,14 @@
                         class="border border-gray-400 p-2 w-full"
                         id="username"
                         name="username"
+                        value="{{old('username')}}"
                         required
                     >
 
                 </div>
+                @error('username')
+                <p class="p-5 text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-300" for="email">
                         Email
@@ -40,6 +44,7 @@
                         class="border border-gray-400 p-2 w-full"
                         id="email"
                         name="email"
+                        value="{{ old('email') }}"
                         required
                     >
 
@@ -52,14 +57,32 @@
                         class="border border-gray-400 p-2 w-full"
                         id="password"
                         name="password"
+                        value="{{old('password')}}"
                         required
                     >
 
                 </div>
+                @error('password')
+                    <p class="text-red-500  pb-2 text-xs">{{ $message }}</p>
+                @enderror
 
                 <div class="mb-6 flex justify-center">
                     <button type="submit" class="border border-gray-400 p-2 w-32">Submit</button>
                 </div>
+
+                @if ($errors->any())
+
+                <ul>
+
+                @foreach ($errors->all() as $error)
+                <li class="text-xs text-red-500">{{ $error }}</li>
+                @endforeach
+                    
+            </ul>
+
+                @endif
+
+             
 
             </form>
          </main>
