@@ -8,14 +8,8 @@
     @else
         <p class="text-center">No Post Detected. Please Check Later</p>
     @endif
-{{--
-    <div class="lg:grid lg:grid-cols-3">
 
-        <x-post-card />
-        <x-post-card />
-        <x-post-card />
-
-    </div> --}}
+    {{ $posts->links() }}
 </main>
 {{--
             @foreach ($posts as $post)
