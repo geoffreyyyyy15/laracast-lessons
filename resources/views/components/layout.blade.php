@@ -7,6 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <body style="font-family: Open Sans, sans-serif">
+    @if (session()->has('success'))
+    <div>
+        <p class="fixed bottom-0 right-0 py-2 px-4 text-green-500 text-lg">{{ session('success') }}</p>
+    </div>
+@endif
+
     <section class="px-6 py-8">
 
         <nav class="md:flex md:justify-between md:items-center">
@@ -54,5 +60,6 @@
             </div>
         </footer>
     </section>
+
 </body>
 
