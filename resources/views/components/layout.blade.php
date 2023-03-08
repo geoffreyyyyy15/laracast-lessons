@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <body style="font-family: Open Sans, sans-serif">
-    @if (session()->has('success'))
-    <div>
-        <p class="fixed bottom-0 right-0 py-2 px-4 text-green-500 text-lg">{{ session('success') }}</p>
-    </div>
-@endif
+  <x-flash />
 
     <section class="px-6 py-8">
 
@@ -22,12 +18,26 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
-
+            <div class="mt-8 md:mt-0 flex items-center">
+                @guest
+                <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                @endguest
+                @auth
+                <form action="/logout" method="post">
+                    @csrf
+                    <button class="text-sm text-blue-500 ml-6" type="submit">Logout</button>
+                </form>
+                @endauth
+                @guest
+                <a href="login" class="bg-white border-2 border-blue-500 ml-3 rounded-full text-xs font-semibold text-black uppercase py-3 px-5">
+                    Login
+                </a>
+               @endguest
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
+
+             
             </div>
         </nav>
 
