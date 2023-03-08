@@ -23,9 +23,12 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
 
-        session()->flash('success', 'User Successfully Added.');
-        return redirect('/');
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'User Successfully Added.');
     }
+
+
 }
