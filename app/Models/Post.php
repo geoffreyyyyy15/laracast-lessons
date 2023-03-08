@@ -44,6 +44,10 @@ class Post extends Model
 
             // return $posts->get();
         }
+        public function comments()
+        {
+            return $this->hasMany(Comment::class);
+        }
         public function category()
         {
             return $this->belongsTo(Category::class);
@@ -52,4 +56,10 @@ class Post extends Model
         {
             return $this->belongsTo(User::class, 'user_id');
         }
+
+        // getting route key name by model
+        
+        // public function getRouteKeyName() {
+        //     return 'slug';
+        // }
 }
