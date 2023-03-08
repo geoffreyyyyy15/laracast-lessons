@@ -1,5 +1,6 @@
 <x-layout>
     <section class="px-6 py-8">
+        <x-flash />
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
@@ -29,7 +30,6 @@
                                     </path>
                                 </g>
                             </svg>
-
                             Back to Posts
                         </a>
 
@@ -46,17 +46,14 @@
                         {!! $post->body !!}
 
                     </div>
+                    <section class="cols-span-8 col-start-5 mt-10 space-y-6">
+                        @include('posts._add-comment-form')
+                        @foreach ($post->comments as $comment)
+                        <x-post-comment :comment="$comment"  />
+                        @endforeach
+                    </section>
                 </div>
             </article>
         </main>
     </section>
-
-    {{-- <h1 class="mx-5 m-5">{{ $post->title }}</h1>
-    <p class="pt-5 mx-5 b-5">By <a href="/author/{{ $post->author->id }}">{{ $post->author->name }} </a>
-    in
-    <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a></p>
-    <div class="border-b-2 border-sky-500 mx-5">
-    <p class="pt-6 mx-5 border-b-5">{!! $post->body !!}</p>
-    <a href="/">Back</a>
-</div> --}}
 </x-layout>
