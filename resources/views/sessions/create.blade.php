@@ -42,9 +42,9 @@
                     <button type="submit" class="border-2 text-white rounded-xl border-gray-400 p-2 w-32">Submit</button>
                 </div>
 
-          
 
-            
+
+
 
             </form>
         </main>
