@@ -1,5 +1,4 @@
 @props(['comment'])
-
 <x-panel>
 <article class="flex bg-gray-800 space-x-2">
     <div class="flex-shrink-0">

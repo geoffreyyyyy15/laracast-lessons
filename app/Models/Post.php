@@ -58,7 +58,7 @@ class Post extends Model
         }
 
         // getting route key name by model
-        
+
         // public function getRouteKeyName() {
         //     return 'slug';
         // }
