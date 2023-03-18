@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 
 
+
+
+
 Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
@@ -34,13 +37,6 @@ Route::post('sessions', [SessionController::class, 'store'])->middleware('guest'
 
 
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
-// Route::get('categories/{category:slug}', function (Category $category){
-//     return view('posts')
-//             ->with('posts', $category->posts)
-//             ->with('currentCategory', $category)
-//             ->with('categories', Category::all());
-// }
-// );
+Route::get('admin/post/create', [PostController::class, 'create'])->middleware('admin');
+Route::post('admin/posts', [PostController::class, 'store'])->middleware('admin');
 
-// );
-// Route::get('/index', [UserController::class, 'index']);
