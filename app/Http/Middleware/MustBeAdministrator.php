@@ -17,8 +17,8 @@ class MustBeAdministrator
     {
 
         // to protect your website on your side only
-        if(auth()->user()?->username !== 'johnDoe24') {
-            abort(403);
+        if(auth()->user()?->username !== 'johnDoe') {
+            abort(Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);

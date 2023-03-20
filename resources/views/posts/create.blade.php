@@ -1,79 +1,31 @@
 <x-layout>
-    <section class="px-6 py-8 mx-auto max-w-sm">
-        <h1 class="text-lg font-bold mb-4">
-            Publish New Post
-        </h1>
-        <x-panel class="max-w-sm mx-auto">
-           <form action="/admin/posts" method="POST" enctype="multipart/form-data">
+    <x-setting heading="Publish New Post">
+        <form action="/admin/posts" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="mb-6">
-                <label for="title" class="block  mb-2 uppercase font-bold text-xs text-white">
-                    Title
-                </label>
-                <input type="text"  name="title" id="title" value="{{ old('title') }}" class="text-black border border-gray-400 p-2 w-full" required>
-            </div>
-            @error('title')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-            <div class="mb-6">
-                <label for="slug" class="block  mb-2 uppercase font-bold text-xs text-white">
-                    Slug
-                </label>
-                <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="text-black border border-gray-400 p-2 w-full" required>
-            </div>
-            @error('slug')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-
-            <div class="mb-6">
-                <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-white">
-                   Thumbnail
-                </label>
-                <input type="file" name="thumbnail" id="thumbnail" class="border border-gray-400 p-2 w-full" required>
-            </div>
-            @error('thumbnail')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-            <div class="mb-6">
-                <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-white">
-                    Excerpt
-                </label>
-                <textarea class="text-black border border-gray-400 p-2 w-full" name="excerpt"  id="excerpt" cols="30" rows="10">{{ old('excerpt') }}</textarea>
-            </div>
-            @error('excerpt')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-
-            <div class="mb-6">
-                <label for="Body" class="block mb-2 uppercase font-bold text-xs text-white">
-                    Body
-                </label>
-                <textarea class="text-black border border-gray-400 p-2 w-full" name="body" id="Body" cols="30" rows="10">{{ old('body') }}</textarea>
-            </div>
-            @error('body')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-            <div class="mb-6">
-                <label for="category" class="block mb-2 uppercase font-bold text-xs text-white">
-                    Category
-                </label>
-                @php
-                    $category = \App\Models\Category::all();
-                @endphp
-              <select name="category_id" id="category_id" class="bg-gray-800">
-                @foreach ($category as $categories)
-                <option
-                 value="{{$categories->id}}"
-                  {{ old('category_id') === $categories->id ?
-                 'selected' : ''}} >{{ucwords($categories->name) }}</option>
-                @endforeach
-              </select>
-            </div>
-            @error('category_id')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-            <x-submit-button>Publish</x-submit-button>
+            <x-form.input name="title"/>
+            <x-form.input name="slug"/>
+            <x-form.input name="thumbnail" type="file"/>
+            <x-form.textarea name="excerpt"/>
+            <x-form.textarea name="body"/>
+           
+            <x-form.field>
+                <x-form.label name="category" />
+                  <select name="category_id" id="category_id" class="bg-gray-800">
+                    @foreach (\App\Models\Category::all() as $categories)
+                    <option
+                     value="{{$categories->id}}"
+                      {{ old('category_id') === $categories->id ?
+                     'selected' : ''}} >{{ucwords($categories->name) }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <x-form.error name="category_id" />
+                <x-submit-button>Publish</x-submit-button>
+               
+            </x-form.field>
+           
+           
         </form>
-    </x-panel>
-    </section>
+        </x-setting>
+    
 </x-layout>

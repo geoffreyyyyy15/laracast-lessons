@@ -29,21 +29,29 @@ class PostController extends Controller
     }
     public function store() {
 
-      $path =  request()->file('thumbnail')->store('thumbnails');
+    //   $path =  request()->file('thumbnail')->store('thumbnails');
 
-        return 'Done: ' . $path;
+    //     return 'Done: ' . $path;
 
-    //    $attributes = request()->validate([
-    //         'title' => ['required', 'max:255'],
-    //         'slug' =>  ['required', Rule::unique('posts', 'slug')],
-    //         'excerpt' => ['required', 'max:255'],
-    //         'body' => ['required'],
-    //         'category_id' => ['required', Rule::exists('categories', 'id')]
-    //     ]);
-    //     $attributes['user_id'] = auth()->id();
+       $attributes = request()->validate([
+            'title' => ['required', 'max:255'],
+            'thumbnail' => ['required', 'image'],
+            'slug' =>  ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => ['required', 'max:255'],
+            'body' => ['required'],
+            'category_id' => ['required', Rule::exists('categories', 'id')]
+        ]);
+        $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-    //     Post::create($attributes);
+        Post::create($attributes);
 
-    //     return redirect('/');
+        return redirect('admin/dashboard')->with('success', 'Post Published!');
+    }
+
+    public function showDashboard() {
+        return view('admin.dashboard')
+        ->with('posts', Post::latest()->where('user_id', auth()->id())
+        ->filter(request(['search', 'category', 'author']))->paginate(15)->withQueryString());
     }
 }

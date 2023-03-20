@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<body style="font-family: Open Sans, sans-serif">
+<body style="font-family: Open Sans, sans-serif" class=" bg-gray-800 text-white">
     <style>
         html{
             scroll-behavior: smooth;
@@ -28,10 +28,23 @@
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 @endguest
                 @auth
-                <form action="/logout" method="post">
-                    @csrf
-                    <button class="text-sm text-blue-500 ml-6" type="submit">Logout</button>
-                </form>
+                <x-dropdown >
+                    <x-slot name="trigger" >
+                        <button class="text-xs font-bold">Welcome, {{ ucwords(auth()->user()->name) }}</button>
+                    </x-slot>
+             
+                    <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                    <x-dropdown-item href="/admin/post/create">New Post </x-dropdown-item>
+                    <x-dropdown-item x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">
+                        <button>Logout</button>
+                    </x-dropdown-item>
+
+                    <form action="/logout" method="post" class="hidden" id="logout-form">
+                        @csrf
+                    </form>
+                </x-dropdown>
+
+               
                 @endauth
                 @guest
                 <a href="login" class="bg-white border-2 border-blue-500 ml-3 rounded-full text-xs font-semibold text-black uppercase py-3 px-5">
@@ -47,7 +60,7 @@
         </nav>
 
         {{ $slot }}
-        <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16" id="newsletter">
+        <footer class="bg-gray-900 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16" id="newsletter">
             <img src="./images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
             <h5 class="text-3xl">Stay in touch with the latest posts</h5>
             <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
